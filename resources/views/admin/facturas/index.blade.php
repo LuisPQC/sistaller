@@ -34,7 +34,7 @@
                             <td style="text-align: center">{{$contador++}}</td>
                             <td>#{{ $factura->trabajo_id }}</td>
                             <td>{{ $factura->trabajo->vehiculo->marca }} {{ $factura->trabajo->vehiculo->modelo }}</td>
-                            <td>${{ number_format($factura->monto_total, 2) }}</td>
+                            <td> {{$configuracion->moneda}} {{ number_format($factura->monto_total, 2) }}</td>
                             <td>
                                 <span class="badge bg-{{ $factura->estado_pago == 'pagado' ? 'success' : 'warning' }}">
                                     {{ ucfirst($factura->estado_pago) }}

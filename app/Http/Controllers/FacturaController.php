@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Configuracion;
 use App\Models\Factura;
 use App\Models\Trabajo;
 use Illuminate\Http\Request;
@@ -12,7 +13,9 @@ class FacturaController extends Controller
     public function index()
     {
         $facturas = Factura::with('trabajo.vehiculo')->latest()->paginate(10);
-        return view('admin.facturas.index', compact('facturas'));
+        $configuracion = Configuracion::first();
+
+        return view('admin.facturas.index', compact('facturas', 'configuracion'));
     }
 
     public function create()
@@ -71,7 +74,7 @@ class FacturaController extends Controller
     public function pdf(Factura $factura)
 {
     $factura->load('trabajo.vehiculo.cliente');
-    $config = configuracion(); // usar helper
+    $config = Configuracion::first();
 
     $pdf = Pdf::loadView('admin.facturas.pdf', compact('factura', 'config'));
     return $pdf->stream('factura_' . $factura->id . '.pdf');

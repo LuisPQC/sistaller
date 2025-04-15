@@ -41,7 +41,7 @@
             <tr>
                 <td>{{ $factura->trabajo->descripcion }}</td>
                 <td>{{ ucfirst($factura->estado_pago) }}</td>
-                <td>${{ number_format($factura->monto_total, 2) }}</td>
+                <td> {{$config->moneda}} {{ number_format($factura->monto_total, 2) }}</td>
             </tr>
         </tbody>
     </table>

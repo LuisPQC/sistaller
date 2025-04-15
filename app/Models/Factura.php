@@ -20,5 +20,8 @@ class Factura extends Model
 {
     return $this->belongsTo(Trabajo::class);
 }
-
+public function configuacion()
+{
+    return $this->belongsTo(Configuracion::class);
+}
 }

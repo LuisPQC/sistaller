@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cotizacion;
 use App\Models\Cliente;
+use App\Models\Configuracion;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class CotizacionController extends Controller
     public function index()
     {
         $cotizaciones = Cotizacion::with('cliente', 'vehiculo')->latest()->paginate(10);
-        return view('admin.cotizaciones.index', compact('cotizaciones'));
+        $configuracion = Configuracion::first();
+        return view('admin.cotizaciones.index', compact('cotizaciones', 'configuracion'));
     }
 
     public function create()

@@ -35,7 +35,7 @@
                 <td style="text-align: center">{{$contador++}}</td>
                     <td>{{ $cotizacion->cliente->nombre }}</td>
                     <td>{{ $cotizacion->vehiculo->marca }} {{ $cotizacion->vehiculo->modelo }}</td>
-                    <td>${{ number_format($cotizacion->total_estimado, 2) }}</td>
+                    <td> {{$configuracion->moneda}} {{ number_format($cotizacion->total_estimado, 2) }}</td>
                     <td>
                         <span class="badge bg-{{ $cotizacion->estado == 'aceptada' ? 'success' : ($cotizacion->estado == 'rechazada' ? 'danger' : 'secondary') }}">
                             {{ ucfirst($cotizacion->estado) }}
