@@ -48,15 +48,15 @@
         </div>
     </div>
 
-    {{-- Cotizaciones --}}
+    {{-- Trabajos --}}
     <div class="col-md-3 col-sm-6 col-12">
     <div class="info-box zoomP">
-            <a href="{{ url('/admin/cotizaciones') }}">
-                <img src="{{ url('/img/controlar.gif') }}" alt="Cotizaciones" width="50">
+            <a href="{{ url('/admin/trabajos') }}">
+                <img src="{{ url('/img/controlar.gif') }}" alt="Trabajos" width="50">
             </a>
             <div class="info-box-content">
-                <span class="info-box-text">Cotizaciones registrados</span>
-                <span class="info-box-number">{{ $cotizaciones }} cotizaciones</span>
+                <span class="info-box-text">Trabajos registrados</span>
+                <span class="info-box-number">{{ $trabajos }} trabajos</span>
             </div>
         </div>
     </div>
@@ -104,7 +104,7 @@
             </a>
             <div class="info-box-content">
                 <span class="info-box-text">Total facturado</span>
-                <span class="info-box-number">${{ number_format($totalFacturado, 2) }} </span>
+                <span class="info-box-number"> {{$config->moneda}} {{ number_format($totalFacturado, 2) }} </span>
             </div>
         </div>
     </div>
@@ -138,9 +138,9 @@
 <div class="row">
     <div class="col-md-6">
         <div class="card card-outline card-primary">
-            <div class="card-header card-title">Total de Cotizaciones por mes</div>
+            <div class="card-header card-title">Total de Trabajos por mes</div>
             <div class="card-body">
-                <canvas id="graficoCotizaciones"></canvas>
+                <canvas id="graficoTrabajos"></canvas>
             </div>
         </div>
     </div>
@@ -176,19 +176,19 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const meses = @json(array_values($meses));
-    const datosCotizaciones = @json(array_values($reporteCotizaciones));
+    const datosTrabajos = @json(array_values($reporteTrabajos));
     const datosFacturas = @json(array_values($reporteFacturas));
     const trabajosPorEstado = @json($trabajosPorEstado);
     const trabajosPorUsuario = @json($trabajosPorUsuario);
 
 
-    new Chart(document.getElementById('graficoCotizaciones'), {
+    new Chart(document.getElementById('graficoTrabajos'), {
         type: 'line',
         data: {
             labels: meses,
             datasets: [{
-                label: 'Cotizaciones por mes',
-                data: datosCotizaciones,
+                label: 'Trabajos por mes',
+                data: datosTrabajos,
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 2,

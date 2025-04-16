@@ -55,10 +55,10 @@ Route::delete('/admin/usuarios/{id}', [App\Http\Controllers\UsuarioController::c
 Route::get('/admin/cotizaciones', [App\Http\Controllers\CotizacionController::class, 'index'])->name('admin.cotizaciones.index')->middleware('auth');
 Route::get('/admin/cotizaciones/create', [App\Http\Controllers\CotizacionController::class, 'create'])->name('admin.cotizaciones.create')->middleware('auth');
 Route::post('/admin/cotizaciones/create', [App\Http\Controllers\CotizacionController::class, 'store'])->name('admin.cotizaciones.store')->middleware('auth');
-Route::get('/admin/cotizaciones/{id}', [App\Http\Controllers\CotizacionController::class, 'show'])->name('admin.cotizaciones.show')->middleware('auth');
-Route::get('/admin/cotizaciones/{id}/edit', [App\Http\Controllers\CotizacionController::class, 'edit'])->name('admin.cotizaciones.edit')->middleware('auth');
-Route::put('/admin/cotizaciones/{id}', [App\Http\Controllers\CotizacionController::class, 'update'])->name('admin.cotizaciones.update')->middleware('auth');
-Route::delete('/admin/cotizaciones/{id}', [App\Http\Controllers\CotizacionController::class, 'destroy'])->name('admin.cotizaciones.destroy')->middleware('auth');
+Route::get('/admin/cotizaciones/{cotizacion}', [App\Http\Controllers\CotizacionController::class, 'show'])->name('admin.cotizaciones.show')->middleware('auth');
+Route::get('/admin/cotizaciones/{cotizacion}/edit', [App\Http\Controllers\CotizacionController::class, 'edit'])->name('admin.cotizaciones.edit')->middleware('auth');
+Route::put('/admin/cotizaciones/{cotizacion}', [App\Http\Controllers\CotizacionController::class, 'update'])->name('admin.cotizaciones.update')->middleware('auth');
+Route::delete('/admin/cotizaciones/{cotizacion}', [App\Http\Controllers\CotizacionController::class, 'destroy'])->name('admin.cotizaciones.destroy')->middleware('auth');
 //ruta para clientes
 Route::get('/admin/clientes', [App\Http\Controllers\ClienteController::class, 'index'])->name('admin.clientes.index')->middleware('auth');
 Route::get('/admin/clientes/create', [App\Http\Controllers\ClienteController::class, 'create'])->name('admin.clientes.create')->middleware('auth');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Cliente;
+use App\Models\Configuracion;
 use App\Models\User;
 use App\Models\Cotizacion;
 use App\Models\Trabajo;
@@ -29,27 +30,29 @@ class AdminController extends Controller
 
     $clientesall = Cliente::count();
     $usuarios = User::count();
-    $cotizaciones = Cotizacion::count();
+    $trabajos = Trabajo::count();
     $trabajosPendientes = Trabajo::where('estado', 'pendiente')->count();
     $trabajosProceso = Trabajo::where('estado', 'proceso')->count();
     $trabajosConcluidos = Trabajo::where('estado', 'concluido')->count();
     $totalFacturado = Factura::sum('monto_total');
     $total_roles = Role::count();
 
+    $config = Configuracion::first();
+
     // Cotizaciones por mes
-    $cotizacionesQuery = Cotizacion::whereYear('fecha_cotizacion', $anioFiltro);
+    $trabajosQuery = Trabajo::whereYear('fecha_inicio', $anioFiltro);
     if ($clienteFiltro) {
-        $cotizacionesQuery->whereHas('cliente', function ($q) use ($clienteFiltro) {
+        $trabajosQuery->whereHas('cliente', function ($q) use ($clienteFiltro) {
             $q->where('cliente_id', $clienteFiltro);
         });
     }
     if ($mesFiltro) {
-        $cotizacionesQuery->whereMonth('fecha_cotizacion', $mesFiltro);
+        $trabajosQuery->whereMonth('fecha_inicio', $mesFiltro);
     }
-    $reporteCotizaciones = array_fill(1, 12, 0);
-    foreach ($cotizacionesQuery->get() as $cot) {
-        $mes = (int)date('n', strtotime($cot->fecha_cotizacion));
-        $reporteCotizaciones[$mes]++;
+    $reporteTrabajos = array_fill(1, 12, 0);
+    foreach ($trabajosQuery->get() as $cot) {
+        $mes = (int)date('n', strtotime($cot->fecha_inicio));
+        $reporteTrabajos[$mes]++;
     }
 
     // Facturas por mes
@@ -98,18 +101,18 @@ class AdminController extends Controller
     return view('admin.index', compact(
         'clientesall',
         'usuarios',
-        'cotizaciones',
+        'trabajos',
         'trabajosPendientes',
         'trabajosProceso',
         'trabajosConcluidos',
         'totalFacturado',
         'total_roles',
-        'reporteCotizaciones',
+        'reporteTrabajos',
         'reporteFacturas',
         'meses',
         'clientes',
         'trabajosPorEstado',
-        'trabajosPorUsuario'
+        'trabajosPorUsuario', 'config'
     ));
 }
 

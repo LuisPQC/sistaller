@@ -357,18 +357,6 @@ return [
             ],
         ],
         [
-            'text' => 'Cotizaciones',
-            'icon' => 'fas fa-fw fa-file-invoice-dollar',
-            'classes' => 'bg-blue text-white',
-            'submenu' => [
-                [
-                    'text' => 'Listado de cotizaciones',
-                    'url' => 'admin/cotizaciones',
-                    'classes' => 'bg-gray text-black',
-                ],
-            ],
-        ],
-        [
             'text' => 'Trabajos',
             'icon' => 'fas fa-fw fa-tools',
             'classes' => 'bg-blue text-white',
